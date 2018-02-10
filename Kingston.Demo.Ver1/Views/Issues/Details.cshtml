@@ -1,0 +1,135 @@
+﻿@model Kingston.Demo.Ver1.ViewModels.IssueViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2></h2>
+<div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>
+                <strong>@Html.DisplayFor(model => model.IssueData.Type)</strong>
+                @Html.DisplayFor(model => model.IssueData.Title)
+            </h4>
+        </div>
+        <div class="panel-body">
+            <p>
+                @Html.DisplayFor(model => model.IssueData.Desc)
+            </p>
+            @foreach (var item in Model.IssueFiles)
+            {
+                <img width="100" src="@Html.DisplayFor(modelItem => item.fullPath)" alt="@Html.DisplayFor(modelItem => item.FileName)" />
+            }
+            <br />
+            <small style="color:gray" class="pull-right">
+                @Html.DisplayFor(model => model.IssueData.KeyInDate)
+            </small>
+            <small style="color:gray">
+                @Html.DisplayFor(model => model.IssueData.Tags)
+            </small>
+        </div>
+        <div class="panel-footer">
+            <h5>
+                <strong>@Model.IssueSubDatas.Count</strong>個回答
+            </h5>
+            <table class="table table-condensed table-hover">
+                <tbody>
+                    @foreach (var item in Model.IssueSubDatas)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Desc) <span style="color:gray">@Html.DisplayFor(modelItem => item.KeyInDate)</span></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <dl class="dl-horizontal hidden">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.IssueData.Pid)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IssueData.Pid)
+        </dd>*@
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueData.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IssueData.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueData.Type)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IssueData.Type)
+        </dd>
+        @*<dt>
+            @Html.DisplayNameFor(model => model.IssueData.SubType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IssueData.SubType)
+        </dd>*@
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueData.Desc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IssueData.Desc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueData.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IssueData.Status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueData.Tags)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IssueData.Tags)
+        </dd>
+        @*<dt>
+            @Html.DisplayNameFor(model => model.IssueData.KeyInUser)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IssueData.KeyInUser)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueData.KeyInDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IssueData.KeyInDate)
+        </dd>*@
+    </dl>
+   
+    <dl>
+        <dt>
+           
+        </dt>
+   
+        <dd>
+            
+        </dd>
+   
+        
+    </dl>
+    <form asp-action="CreateIssueSub" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="IssueSubData.Pid" value="@Model.IssueData.Id" />
+        <div class="form-group">
+            <label asp-for="IssueSubData.Desc" class="control-label"></label>
+            <textarea asp-for="IssueSubData.Desc" class="form-control" rows="5"></textarea>
+            <span asp-validation-for="IssueSubData.Desc" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" value="回覆" class="btn btn-primary">
+            <a asp-action="Index" class="btn btn-default">返回</a>
+        </div>
+    </form>
+</div>
+<div class="hidden">
+    <a asp-action="Edit" asp-route-id="@Model.IssueData.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

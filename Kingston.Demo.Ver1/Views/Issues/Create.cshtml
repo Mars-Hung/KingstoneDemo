@@ -1,0 +1,72 @@
+﻿@model Kingston.Demo.Ver1.ViewModels.IssueViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Issue</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IssueData.Title" class="control-label"></label>
+                <input asp-for="IssueData.Title" class="form-control" />
+                <span asp-validation-for="IssueData.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IssueData.Type" class="control-label"></label>
+                <select asp-for="IssueData.Type" class="form-control" asp-items="@Model.TblCode_Sys">
+                    <option value="" >請選取</option>
+                </select>
+                <span asp-validation-for="IssueData.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group hidden">
+                <label asp-for="IssueData.SubType" class="control-label"></label>
+                <input asp-for="IssueData.SubType" class="form-control" />
+                <span asp-validation-for="IssueData.SubType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IssueData.Desc" class="control-label"></label>
+                <textarea asp-for="IssueData.Desc" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="IssueData.Desc" class="text-danger"></span>
+            </div>
+            <div class="form-group hidden">
+                <label asp-for="IssueData.Status" class="control-label"></label>
+                <input asp-for="IssueData.Status" class="form-control" />
+                <span asp-validation-for="IssueData.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IssueData.Tags" class="control-label"></label>
+                <input asp-for="IssueData.Tags" class="form-control" placeholder="標籤，請用逗點(,)區隔．" />
+                <span asp-validation-for="IssueData.Tags" class="text-danger"></span>
+            </div>
+            <div class="form-group hidden">
+                <label asp-for="IssueData.KeyInUser" class="control-label"></label>
+                <input asp-for="IssueData.KeyInUser" class="form-control" />
+                <span asp-validation-for="IssueData.KeyInUser" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="files" class="control-label">檔案上傳</label>
+                <input asp-for="files" type="file" name="files" multiple />
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" value="發問" class="btn btn-primary" >
+                <a asp-action="Index" class="btn btn-default">返回</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

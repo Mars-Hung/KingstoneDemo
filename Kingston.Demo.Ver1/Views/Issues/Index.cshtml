@@ -1,0 +1,86 @@
+﻿@model Kingston.Demo.Ver1.ViewModels.IssueViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>系統問題回報</h2>
+<form asp-action="Index" method="get" class="container-fluid">
+    <div class=" no-color">
+        <div class="row">
+            <div class="col-md-4">
+               <label for="Type">系統分類:</label> 
+                <select class="form-control" name="SysType" asp-items="@Model.TblCode_Sys" >
+                    <option value="">請選取</option>
+                </select>
+            </div>
+            <div class=" col-md-4">
+                <label for="Type">搜尋字串:</label> 
+                <input type="text" class="form-control" name="SearchString" placeholder="Search" value="@ViewData["currentFilter"]" />
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-default">
+                    <i class="glyphicon glyphicon-search"></i>搜尋
+                </button>
+                <a asp-action="Create" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span>發問</a>
+            </div>
+        </div>
+    </div>
+</form>
+<hr />
+
+    <div class="table-responsive">
+
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.IssueData.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IssueData.Type)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.IssueData.Desc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IssueData.Status)
+                </th>
+
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.IssueDatas)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Desc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StatusName)
+                    </td>
+
+
+                    <td>
+                        @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
+                        <a asp-action="Details" asp-route-id="@item.Id">查看</a>
+                        @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
